@@ -1,0 +1,5 @@
+DEFAULT astra
+	LABEL astra
+	Kernel linux     #зазрузка ядра линукса
+	append initrd=initrd.gz auto=true priority=critical hostname=Client1 domain=test.local astra-license/license=true url=http://(указываем ip адресс)/preseed.cfg interface=auto
+	netcfg/dhcp_timeout=60   # при отсутвие доступа прикратить попытки подключения через 60 сек

@@ -1,0 +1,27 @@
+sudo apt install -y isc-dhcp-server tftpd-hpa apache2
+sudo nano /etc/defauult/isc-dhcp-server
+sudo nano /etc/dhcp/dhcpd.conf
+subnet 192.168.1.0 netmask 255.255.255.0 { 
+       range 192.168.1.100 192.168.1.110; 
+       option routers 192.168.1.2; 
+       filename "pxelinux.0"; 
+       next-server 192.168.1.75; 
+ option domain-name-servers 8.8.8.8;)
+sudo systemctl start isc-dhcp-server
+sudo systemctl status isc-dhcp-server
+systemctl status apache2
+sudo nano /etc/apache2/apache2.conf
+sudo systemctl stop apache2
+sudo systemctl start apache2
+cd /var/www/html/
+rm index.html
+sudo mkdir astra
+sudo mount /dev/sr0 /var/www/html/astra/
+xan@astra:/var/www/html$ sudo nano preseed.cfg
+cd /srv/tftp/
+sudo cp -r /var/www/html/astra/netinst/* /srv/tftp/
+sudo cp -r /var/www/html/astra/isolinux/ldlinux.c32 /srv/tftp/
+sudo rm example-preseed.txt
+sudo mkdir pxelinux.cfg
+cd pxelinux.cfg/
+
